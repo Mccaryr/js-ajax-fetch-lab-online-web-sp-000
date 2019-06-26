@@ -43,5 +43,12 @@ function createIssue() {
 }
 
 function getIssues() {
-  //once an issue is submitted, fetch all open issues to see the issues you are creating
+  const repo = `mccaryr/js-ajax-fetch-lab`;
+  fetch(`https://api.github.com/repos/${repo}/issues`, {
+    headers: {
+      Authorization: `token ${getToken()}`
+    }
+  })
+    .then(res => res.json())
+    .then(json => console.log(json));
 }
