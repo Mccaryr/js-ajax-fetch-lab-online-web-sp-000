@@ -25,7 +25,21 @@ function showResults(json) {
 }
 
 function createIssue() {
-  //use this function to create an issue based on the values input in index.html
+  const repo = `mccaryr/js-ajax-fetch-lab`;
+  const postData = {
+    title: document.getElementById('title').value
+    body: document.getElementById('body').value
+  };
+
+  fetch(`https://api.github.com/repos/${repo}/issues`, {
+    method: 'POST',
+    body: JSON.stringify(postData),
+    headers: {
+      Authorization: `token ${getToken()}`
+    }
+  })
+    .then(res => res.json())
+    .then(json => getIssues());
 }
 
 function getIssues() {
